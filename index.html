@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="media_container">
+      <div class="media-block add-movies">
+        <h1>Add Movies</h1>
+        <div class="media_container-inner">
+          <div class="media_movies">
+            <div class="movie-edit">
+              <p class="movie-edit-text">Title</p>
+              <input type="text" name="title" placeholder="" />
+              <p class="movie-edit-text">Year</p>
+              <input type="text" name="year" placeholder="" />
+              <p class="movie-edit-text">Director</p>
+              <input type="text" name="director" placeholder="" />
+            </div>
+            <div class="movie_genres">
+              <p>Genres</p>
+              <div>
+                <input
+                  type="radio"
+                  id="drama"
+                  name="genres"
+                  value="drama"
+                  checked
+                />
+                <label for="drama">Drama</label>
+                <div class="dot"></div>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  id="thriller"
+                  name="genres"
+                  value="thriller"
+                />
+                <label for="thriller">Thriller</label>
+              </div>
+
+              <div>
+                <input type="radio" id="action" name="genres" value="action" />
+                <label for="action">Action</label>
+              </div>
+              <div>
+                <input type="radio" id="comedy" name="genres" value="comedy" />
+                <label for="comedy">Comedy</label>
+              </div>
+
+              <div>
+                <input type="radio" id="sci-fi" name="genres" value="sci-fi" />
+                <label for="sci-fi">Science Fiction</label>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  id="romance"
+                  name="genres"
+                  value="romance"
+                />
+                <label for="romance">Romance</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="media-block media_library">
+        <h1>Media Library</h1>
+        <div class="media_container-inner"></div>
+      </div>
+    </div>
+  </body>
+</html>
