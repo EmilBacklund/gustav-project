@@ -9,7 +9,7 @@ body {
   color: #fff;
 }
 
-.media-container {
+.media_container {
   margin: 0 auto;
   max-width: 864px;
   display: flex;
@@ -20,8 +20,20 @@ body {
 .media-block {
   background-color: #161d2e;
   padding: 40px;
+  border-radius: 10px;
 }
 
 .add-movies {
   margin-top: 80px;
+}
+
+.media_container-inner {
+  padding: 20px;
+  background-color: #262f43;
+  border-radius: 10px;
+}
+
+.media_movies {
+  display: flex;
+  justify-content: space-between;
 }

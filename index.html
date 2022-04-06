@@ -14,12 +14,65 @@
     />
   </head>
   <body>
-    <div class="media-container">
+    <div class="media_container">
       <div class="media-block add-movies">
         <h1>Add Movies</h1>
+        <div class="media_container-inner">
+          <div class="media_movies">
+            <div>
+              <p>Title</p>
+              <p>Year</p>
+              <p>Director</p>
+            </div>
+            <div>
+              Genres
+              <div>
+                <input
+                  type="radio"
+                  id="huey"
+                  name="genres"
+                  value="huey"
+                  checked
+                />
+                <label for="huey">Drama</label>
+              </div>
+
+              <div>
+                <input type="radio" id="dewey" name="genres" value="dewey" />
+                <label for="dewey">Thriller</label>
+              </div>
+
+              <div>
+                <input type="radio" id="louie" name="genres" value="louie" />
+                <label for="louie">Action</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="comedy"
+                  name="genres"
+                  value="huey"
+                  checked
+                />
+                <label for="huey">Comedy</label>
+              </div>
+
+              <div>
+                <input type="radio" id="dewey" name="genres" value="dewey" />
+                <label for="dewey">Science Fiction</label>
+              </div>
+
+              <div>
+                <input type="radio" id="louie" name="genres" value="louie" />
+                <label for="louie">Romance</label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="media-block media-library">
+      <div class="media-block media_library">
         <h1>Media Library</h1>
+        <div class="media_container-inner"></div>
       </div>
     </div>
   </body>
