@@ -36,4 +36,33 @@ body {
 .media_movies {
   display: flex;
   justify-content: space-between;
+  gap: 60px;
+}
+
+.movie-edit input {
+  background-color: transparent;
+  border: 1px solid #9d9fa7;
+  height: 40px;
+  width: 100%;
+  text-indent: 10px;
+  font-size: 16px;
+  color: #9d9fa7;
+  border-radius: 2px;
+}
+
+.movie-edit input::selection {
+  background: #546a9f;
+}
+
+.movie-edit {
+  width: 50%;
+}
+
+.movie_genres {
+  width: 50%;
+}
+
+.movie-edit-text {
+  font-size: 24px;
+  margin-bottom: 8px;
 }
