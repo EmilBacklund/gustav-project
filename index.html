@@ -19,52 +19,60 @@
         <h1>Add Movies</h1>
         <div class="media_container-inner">
           <div class="media_movies">
-            <div>
-              <p>Title</p>
-              <p>Year</p>
-              <p>Director</p>
+            <div class="movie-edit">
+              <p class="movie-edit-text">Title</p>
+              <input type="text" name="title" placeholder="" />
+              <p class="movie-edit-text">Year</p>
+              <input type="text" name="year" placeholder="" />
+              <p class="movie-edit-text">Director</p>
+              <input type="text" name="director" placeholder="" />
             </div>
-            <div>
-              Genres
+            <div class="movie_genres">
+              <p>Genres</p>
               <div>
                 <input
                   type="radio"
-                  id="huey"
+                  id="drama"
                   name="genres"
-                  value="huey"
+                  value="drama"
                   checked
                 />
-                <label for="huey">Drama</label>
+                <label for="drama">Drama</label>
+                <div class="dot"></div>
               </div>
 
-              <div>
-                <input type="radio" id="dewey" name="genres" value="dewey" />
-                <label for="dewey">Thriller</label>
-              </div>
-
-              <div>
-                <input type="radio" id="louie" name="genres" value="louie" />
-                <label for="louie">Action</label>
-              </div>
               <div>
                 <input
                   type="radio"
-                  id="comedy"
+                  id="thriller"
                   name="genres"
-                  value="huey"
-                  checked
+                  value="thriller"
                 />
-                <label for="huey">Comedy</label>
+                <label for="thriller">Thriller</label>
               </div>
 
               <div>
-                <input type="radio" id="dewey" name="genres" value="dewey" />
-                <label for="dewey">Science Fiction</label>
+                <input type="radio" id="action" name="genres" value="action" />
+                <label for="action">Action</label>
+              </div>
+              <div>
+                <input type="radio" id="comedy" name="genres" value="comedy" />
+                <label for="comedy">Comedy</label>
               </div>
 
               <div>
-                <input type="radio" id="louie" name="genres" value="louie" />
-                <label for="louie">Romance</label>
+                <input type="radio" id="sci-fi" name="genres" value="sci-fi" />
+                <label for="sci-fi">Science Fiction</label>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  id="romance"
+                  name="genres"
+                  value="romance"
+                />
+                <label for="romance">Romance</label>
               </div>
             </div>
           </div>
