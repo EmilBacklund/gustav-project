@@ -111,6 +111,34 @@ body {
   gap: 60px;
 }
 
+.media_header-static {
+  display: flex;
+  justify-content: space-around;
+}
+
+.media-title {
+  width: 43%;
+}
+
+.media-director {
+  width: 22%;
+}
+
+.media-year {
+  width: 8%;
+}
+
+.media-genre {
+  width: 15%;
+}
+
+.media-update {
+  width: 12%;
+}
+
+.static {
+}
+
 @media screen and (max-width: 619px) {
   .radio {
     margin-bottom: 16px;
