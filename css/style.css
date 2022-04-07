@@ -103,7 +103,6 @@ body {
 }
 
 .invisible-object {
-  height: 40px;
   width: 50%;
 }
 
@@ -123,6 +122,10 @@ body {
 
   .invisible-object {
     display: none;
+  }
+
+  .add-movies {
+    margin-top: 0;
   }
 }
 
