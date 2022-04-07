@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/radio.css" />
   </head>
   <body>
     <div class="media_container">
@@ -34,53 +35,67 @@
               </div>
               <div class="confirm-btn">Confirm</div>
             </div>
-            <div class="movie_genres">
-              <p>Genres</p>
-              <div>
+            <div>
+              <label for="myRadioId" class="radio">
                 <input
                   type="radio"
-                  id="drama"
-                  name="genres"
-                  value="drama"
-                  checked
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
                 />
-                <label for="drama">Drama</label>
-                <div class="dot"></div>
-              </div>
-
-              <div>
+                <div class="radio__drama"></div>
+                Drama
+              </label>
+              <label for="myRadioId" class="radio">
                 <input
                   type="radio"
-                  id="thriller"
-                  name="genres"
-                  value="thriller"
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
                 />
-                <label for="thriller">Thriller</label>
-              </div>
-
-              <div>
-                <input type="radio" id="action" name="genres" value="action" />
-                <label for="action">Action</label>
-              </div>
-              <div>
-                <input type="radio" id="comedy" name="genres" value="comedy" />
-                <label for="comedy">Comedy</label>
-              </div>
-
-              <div>
-                <input type="radio" id="sci-fi" name="genres" value="sci-fi" />
-                <label for="sci-fi">Science Fiction</label>
-              </div>
-
-              <div>
+                <div class="radio__thriller"></div>
+                Thriller
+              </label>
+              <label for="myRadioId" class="radio">
                 <input
                   type="radio"
-                  id="romance"
-                  name="genres"
-                  value="romance"
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
                 />
-                <label for="romance">Romance</label>
-              </div>
+                <div class="radio__radio"></div>
+                Action
+              </label>
+              <label for="myRadioId" class="radio">
+                <input
+                  type="radio"
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
+                />
+                <div class="radio__radio"></div>
+                Comedy
+              </label>
+              <label for="myRadioId" class="radio">
+                <input
+                  type="radio"
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
+                />
+                <div class="radio__radio"></div>
+                Science Fiction
+              </label>
+              <label for="myRadioId" class="radio">
+                <input
+                  type="radio"
+                  name="myRadioField"
+                  id="myRadioId"
+                  class="radio__input"
+                />
+                <div class="radio__radio"></div>
+                Romance
+              </label>
             </div>
           </div>
         </div>
