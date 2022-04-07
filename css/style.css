@@ -37,6 +37,7 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 60px;
+  margin-bottom: 20px;
 }
 
 .movie-edit input {
@@ -62,8 +63,11 @@ body {
   gap: 20px;
 }
 
-.movie_genres {
+.radio-container {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .movie-edit-text {
@@ -74,7 +78,7 @@ body {
 .confirm-btn {
   background-color: #546a9f;
   height: 40px;
-  width: 100%;
+  width: 50%;
   border-radius: 5px;
   font-size: 24px;
   text-align: center;
@@ -90,5 +94,15 @@ body {
 }
 
 .confirm-btn.active {
-  background-color: #289637;
+  background-color: #0c1323;
+}
+
+.invisible-object {
+  height: 40px;
+  width: 50%;
+}
+
+.confirm-container {
+  display: flex;
+  gap: 60px;
 }
