@@ -10,12 +10,12 @@ confirmButton.addEventListener("mouseup", function () {
   const mouseUp = this;
   setTimeout(function () {
     mouseUp.classList.remove("active");
-  }, 450);
+  }, 250);
 });
 
 confirmButton.addEventListener("mouseout", function () {
   const btnLeave = this;
   setTimeout(function () {
     btnLeave.classList.remove("active");
-  }, 450);
+  }, 250);
 });
