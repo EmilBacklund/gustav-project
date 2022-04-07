@@ -42,7 +42,7 @@ body {
 .movie-edit input {
   background-color: transparent;
   border: 1px solid #9d9fa7;
-  height: 40px;
+  height: 32px;
   width: 100%;
   text-indent: 10px;
   font-size: 16px;
@@ -56,6 +56,10 @@ body {
 
 .movie-edit {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .movie_genres {
@@ -65,4 +69,26 @@ body {
 .movie-edit-text {
   font-size: 24px;
   margin-bottom: 8px;
+}
+
+.confirm-btn {
+  background-color: #546a9f;
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.45s ease;
+  user-select: none;
+}
+
+.confirm-btn:hover {
+  background-color: #3454a0;
+}
+
+.confirm-btn.active {
+  background-color: #289637;
 }
