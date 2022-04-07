@@ -36,7 +36,9 @@ body {
 .media_movies {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 60px;
+  margin-bottom: 45px;
 }
 
 .movie-edit input {
@@ -60,10 +62,17 @@ body {
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+  flex: 1;
+  min-width: 220px;
 }
 
-.movie_genres {
+.radio-container {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 220px;
 }
 
 .movie-edit-text {
@@ -74,7 +83,7 @@ body {
 .confirm-btn {
   background-color: #546a9f;
   height: 40px;
-  width: 100%;
+  width: 50%;
   border-radius: 5px;
   font-size: 24px;
   text-align: center;
@@ -90,5 +99,35 @@ body {
 }
 
 .confirm-btn.active {
-  background-color: #289637;
+  box-shadow: 0px 0px 50px 14px #3454a0;
+}
+
+.invisible-object {
+  height: 40px;
+  width: 50%;
+}
+
+.confirm-container {
+  display: flex;
+  gap: 60px;
+}
+
+@media screen and (max-width: 619px) {
+  .radio {
+    margin-bottom: 16px;
+  }
+
+  .confirm-btn {
+    width: 100%;
+  }
+
+  .invisible-object {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .movie-edit {
+    min-width: 100px;
+  }
 }
