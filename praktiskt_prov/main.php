@@ -21,9 +21,11 @@ try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PD
     //Om inta databasen nås så skapar vi en fel hantering som ger oss en felmedelningsvärde samt meddelar användaren att systemet är nere(Detta är bortom användarens kapacitet att påverka)
 catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode());}
 
- if(isset($_POST['moviedelete'] $$ isset($_POST['moviecheck'])
+ if(isset($_POST['movieid']) && isset($_POST['moviecheck']))
  {
-  seassion_start();
+  echo "edit knapp";
+  session_start();
+
   $_SESSION['titel']    = $_POST['movietitel'];
   $_SESSION['id']       = $_POST['movieid'];
   $_SESSION['director'] = $_POST['moviedirector'];
@@ -32,34 +34,35 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
   Redirect('edit.php');
  }
-
 if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre']))
 {
+  echo "formulär har värden";
     $spellcheck = $_POST['titel'] . $_POST['director'] . $_POST ['year'] . $_POST['genre'];
     if(!ctype_alnum($spellcheck))
     { 
+      echo "innehåller fel tecken";
         die();
+    }
+    elseif (strlen($_POST ['year']) !=  4)
+    {
+      echo "fel år";
+      $_POST = null;
+      die();
     }
     else
     {
-        if(strlen($_POST ['year']) != 4)
-        {
-            $_POST = null;
-            die();
-        }
-        else
-        {
-            $addmovie = Add_Movie($pdo, $_POST);
-        }
+      echo "Movie addad";
+      Add_Movie($pdo, $_POST);
+      $_POST = null;
     }
 }
-else{echo 'hhhhhhhhhhhhh';}
+// else{echo "ingenting fucking hände";}
 echo <<<_END
 <body>
 <div class='media_container'>
   <div class='media-block add-movies'>
     <h1>Add Movies</h1>
-    <form action=''>
+    <form action='' method='post'>
       <div class='media_container-inner'>
         <div class='media_movies'>
           <div class='movie-edit'>
@@ -69,7 +72,7 @@ echo <<<_END
             </div>
             <div>
               <p class='movie-edit-text'>Year</p>
-              <input type='text' name='year' placeholder='' />
+              <input type='text' name='year' placeholder='YYYY' />
             </div>
             <div>
               <p class='movie-edit-text'>Director</p>
@@ -81,8 +84,9 @@ echo <<<_END
             <label for='drama' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='drama'
+                value='1'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -91,8 +95,9 @@ echo <<<_END
             <label for='thriller' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='thriller'
+                value='2'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -101,8 +106,9 @@ echo <<<_END
             <label for='action' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='action'
+                value='3'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -111,8 +117,9 @@ echo <<<_END
             <label for='comedy' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='comedy'
+                value='4'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -121,8 +128,9 @@ echo <<<_END
             <label for='scifi' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='scifi'
+                value='5'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -131,8 +139,9 @@ echo <<<_END
             <label for='romance' class='radio'>
               <input
                 type='radio'
-                name='myRadioField'
+                name='genre'
                 id='romance'
+                value='6'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -141,7 +150,7 @@ echo <<<_END
           </div>
         </div>
         <div class='confirm-container'>
-          <div class='confirm-btn'>Confirm</div>
+          <input type='submit' class='confirm-btn' value='Add Movie' > 
           <div class='invisible-object'></div>
         </div>
       </div>
@@ -168,13 +177,11 @@ echo <<<_END
 _END;
 Get_Movies($pdo);
 echo <<<_END
-
 <div class="media-footer-container">
 <div class="media-footer-outer">
 <div class="media-footer-inner"></div>
 </div>
 </div>
-
 _END;
 function Manage_String($pdo, $array)
 {
@@ -182,11 +189,7 @@ function Manage_String($pdo, $array)
     {
         $string = $pdo->quote($string);
         $string = Fix_String($string);
-        //return $string;
     }
-    // $string = $pdo->quote($string);
-    // $string = Fix_String($string);
-    // return $string;
     return $array;
 }
 function Fix_String($string)
@@ -211,7 +214,6 @@ function Get_Movies($pdo)
         $year = htmlspecialchars($row['year']);
         $genre = htmlspecialchars($row['genre']);
         echo <<<_END
-        
                 <div class="block-post-container">
                      <div class="post-container">
                          <div class="library-block">
@@ -219,23 +221,27 @@ function Get_Movies($pdo)
                                 <div class="media-director">$director</div>
                                 <div class="media-year">$year</div>
                                 <div class="media-genre">$genre</div>
-                                <div class="media-edit">Edit</div>
-                                <input type='hidden' name='id' value='$id'>
-                                         </div>
+                                <form action='' method='post'>
+                                <input type='hidden' name='movieid' value='$id'>
+                                <input type='hidden' name='movietitel' value='$titel'>
+                                <input type='hidden' name='moviedirector' value='$director'>
+                                <input type='hidden' name='movieyear' value='$year'>
+                                <input type='hidden' name='moviegenre' value='$genre'>
+                                <input type='hidden' name='moviecheck' value='check'>
+                                <input type='submit' value='Edit'></form>
+                              </div>
                      </div>
-                </div>
-                     
-            
+                </div>     
     _END;
 
 
       //<form action='' method='post' id='delete'> lägg till i html koden med annan id!
-      //<input type='hidden' name='movieid' value='$id'>
-      //<input type='hidden' name='movietitel' value='$titel'>
-      //<input type='hidden' name='moviedirector' value='$director'>
-      //<input type='hidden' name='movieyear' value='$year'>
-      //<input type='hidden' name='moviegenre' value='$genre'>
-      //<input type='hidden' name='moviecheck' value='check'>
+      // <input type='hidden' name='movieid' value='$id'>
+      // <input type='hidden' name='movietitel' value='$titel'>
+      // <input type='hidden' name='moviedirector' value='$director'>
+      // <input type='hidden' name='movieyear' value='$year'>
+      // <input type='hidden' name='moviegenre' value='$genre'>
+      // <input type='hidden' name='moviecheck' value='check'>
       //<input type='submit' name='movieddit' value='Edit'></form>
     } 
 }
@@ -247,7 +253,7 @@ function Add_Movie($pdo, $input)
                         'genre'     => $input['genre']);
     $inputholder = Manage_String($pdo, $inputholder);
     $id = '';
-    $stmt->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
+    $stmt = $pdo->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
     $stmt->bindParam(1, $id,                        PDO::PARAM_INT);
     $stmt->bindParam(2, $inputholder['titel'],      PDO::PARAM_STR, 128);
     $stmt->bindParam(3, $inputholder['director'],   PDO::PARAM_STR, 128);
@@ -258,6 +264,7 @@ function Add_Movie($pdo, $input)
                     $inputholder['director'],
                     $$inputholder['year'],
                     $inputholder['genre']]);
+                    echo "la till film";
 }
 function Redirect($path) 
     {
@@ -271,12 +278,4 @@ function Redirect($path)
         //dödar programmet
         die();
     }
-// function Get_Genres()
-// {
-//     $query = 'SELECT * FROM genre';
-//     $genreres = $pdo->query($query);
-//     $row = $genreres->fetch();
-//     $genre_id = $row['genre_id'];
-//     $genre = $row['genre'];
-// }
 ?>
