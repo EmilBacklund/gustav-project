@@ -150,30 +150,32 @@ echo <<<_END
   <div class='media-block media_library'>
     <h1>Media Library</h1>
     <div class='media_container-inner'>
-      <table style='width: 100%'>
-        <tr>
-          <th>Title</th>
-          <th>Director</th>
-          <th>Year</th>
-          <th>Genre</th>
-          <th>Update</th>
-        </tr>
-        <tr>
-          <td>Title</td>
-          <td>Director</td>
-          <td>Year</td>
-          <td>Genre</td>
-          <td>Edit</td>
-        </tr>
-      </table>
+      <div>
+        <div class='media_header-static'>
+          <div class='static media-title'>Title</div>
+          <div class='static media-director'>Director</div>
+          <div class='static media-year'>Year</div>
+          <div class='static media-genre'>Genre</div>
+          <div class='static media-update'>Update</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<script src='js/confirm-btn.js'></script>
+<script src='../js/confirm-btn.js'></script>
 </body>
 </html>
 _END;
 Get_Movies($pdo);
+echo <<<_END
+
+<div class="media-footer-container">
+<div class="media-footer-outer">
+<div class="media-footer-inner"></div>
+</div>
+</div>
+
+_END;
 function Manage_String($pdo, $array)
 {
     foreach ($array as $key => $string)
@@ -210,23 +212,17 @@ function Get_Movies($pdo)
         $genre = htmlspecialchars($row['genre']);
         echo <<<_END
         
-                
-        <div class='gustav_testar'>
-                    <div class='media-block media_library'>
-                    
-                        <div class='media_container-inner'>
-                        <table style='width: 100%'>
-                        <tr>
-                        <td>$titel</td>
-                        <td>$director</td>
-                        <td>$year</td>
-                        <td>$genre</td>
-                        <td>Edit</td>
-                        <input type='hidden' name='id' value='$id'>
-                        </tr>
-                        </table>
-                         </div>
-                         </div>
+                <div class="block-post-container">
+                     <div class="post-container">
+                         <div class="library-block">
+                                <div class="media-title">$titel</div>
+                                <div class="media-director">$director</div>
+                                <div class="media-year">$year</div>
+                                <div class="media-genre">$genre</div>
+                                <div class="media-edit">Edit</div>
+                                <input type='hidden' name='id' value='$id'>
+                                         </div>
+                     </div>
                 </div>
                      
             
