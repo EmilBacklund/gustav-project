@@ -31,7 +31,7 @@ function Add_Movie($pdo, $input)
 
     foreach ($test as $item)
     {
-        echo $item . "<br>";
+        echo $item . '<br>';
     }
 
     // $test = array('titel'    => $input['titel'],
@@ -75,4 +75,121 @@ function Fix_String($string)
     $string = htmlentities($string);
     return $string;
 }
+
+<body>
+<div class='media_container'>
+  <div class='media-block add-movies'>
+    <h1>Add Movies</h1>
+    <form action=''>
+      <div class='media_container-inner'>
+        <div class='media_movies'>
+          <div class='movie-edit'>
+            <div>
+              <p class='movie-edit-text'>Title</p>
+              <input type='text' name='title' placeholder='' />
+            </div>
+            <div>
+              <p class='movie-edit-text'>Year</p>
+              <input type='text' name='year' placeholder='' />
+            </div>
+            <div>
+              <p class='movie-edit-text'>Director</p>
+              <input type='text' name='director' placeholder='' />
+            </div>
+          </div>
+          <div class='radio-container'>
+            <p class='movie-edit-text'>Genres</p>
+            <label for='drama' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='drama'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Drama
+            </label>
+            <label for='thriller' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='thriller'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Thriller
+            </label>
+            <label for='action' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='action'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Action
+            </label>
+            <label for='comedy' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='comedy'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Comedy
+            </label>
+            <label for='scifi' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='scifi'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Science Fiction
+            </label>
+            <label for='romance' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='romance'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Romance
+            </label>
+          </div>
+        </div>
+        <div class='confirm-container'>
+          <div class='confirm-btn'>Confirm</div>
+          <div class='invisible-object'></div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='media-block media_library'>
+    <h1>Media Library</h1>
+    <div class='media_container-inner'>
+      <table style='width: 100%'>
+        <tr>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Year</th>
+          <th>Genre</th>
+          <th>Update</th>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td>Director</td>
+          <td>Year</td>
+          <td>Genre</td>
+          <td>Edit</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<script src='js/confirm-btn.js'></script>
+</body>
 ?>
