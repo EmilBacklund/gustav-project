@@ -37,7 +37,7 @@ function Add_Movie($pdo, $input)
     // $test = array('titel'    => $input['titel'],
     //                     'director'  => $input['director'],
     //                     'year'      => $input['year'],
-    //                     'genre'     => $input['genre']);
+    //                     'genre'     => $input['genre']);asd
 
 
 
