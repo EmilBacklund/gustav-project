@@ -141,9 +141,26 @@ echo <<<_END
             </div>
           </div>
       </div>
+      </form>
     </div>
     <script src='js/confirm-btn.js'></script>
-    </form>
+    <div class='gustav_testar'>
+    <div class="media-block media_library">
+        <h1>Media Library</h1>
+        <div class="media_container-inner">
+          <table style="width: 100%">
+          <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Year</th>
+            <th>Genre</th>
+            <th>Update</th>
+          </tr>
+        </table>
+        </div>
+        </div>
+        </div>
+      </div>
   </body>
 </html>
 _END;
@@ -185,18 +202,11 @@ function Get_Movies($pdo)
         echo <<<_END
         
                 
-            <div class='media_container'>
+        <div class='gustav_testar'>
                     <div class='media-block media_library'>
-                    <h1>$titel</h1>
+                    
                         <div class='media_container-inner'>
                         <table style='width: 100%'>
-                        <tr>
-              <th>Title</th>
-              <th>Director</th>
-              <th>Year</th>
-              <th>Genre</th>
-              <th>Update</th>
-            </tr>
                         <tr>
                         <td>$titel</td>
                         <td>$director</td>
@@ -212,26 +222,6 @@ function Get_Movies($pdo)
                      
             
     _END;
-    // <body>
-    //         <div class='media_container'>
-    //             <div class='media-block media_library'>
-    //             <h1>Media Library</h1>
-    //                 <div class='media_container-inner'>
-    //                 <table style='width: 100%'>
-    //                 <tr>
-    //                 <td>$titel</td>
-    //                 <td>$director</td>
-    //                 <td>$year</td>
-    //                 <td>$genre</td>
-    //                 <td>Edit</td>
-    //                 <input type='hidden' name='id' value='$id'>
-    //                 </tr>
-    //                 </table>
-    //                  </div>
-    //                  </div>
-    //         </div>
-    //     </body>
-    //     </html>
     } 
 }
 function Add_Movie($input)
