@@ -21,7 +21,17 @@ try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PD
     //Om inta databasen nås så skapar vi en fel hantering som ger oss en felmedelningsvärde samt meddelar användaren att systemet är nere(Detta är bortom användarens kapacitet att påverka)
 catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode());}
 
-// if(is) asd
+ if(isset($_POST['moviedelete'] $$ isset($_POST['moviecheck'])
+ {
+  seassion_start();
+  $_SESSION['titel']    = $_POST['movietitel'];
+  $_SESSION['id']       = $_POST['movieid'];
+  $_SESSION['director'] = $_POST['moviedirector'];
+  $_SESSION['year']     = $_POST['movieyear'];
+  $_SESSION['genre']    = $_POST['moviegenre'];
+  $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+  Redirect('edit.php');
+ }
 
 if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre']))
 {
@@ -34,6 +44,7 @@ if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) 
     {
         if(strlen($_POST ['year']) != 4)
         {
+            $_POST = null;
             die();
         }
         else
@@ -44,124 +55,122 @@ if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) 
 }
 else{echo 'hhhhhhhhhhhhh';}
 echo <<<_END
-  <body>
-  <form method='post' action='main.php'>
-    <div class='media_container'>
-      <div class='media-block add-movies'>
-        <h1>Add Movies</h1>
-          <div class='media_container-inner'>
-            <div class='media_movies'>
-              <div class='movie-edit'>
-                <div>
-                  <p class='movie-edit-text'>Title</p>
-                  <input type='text' name='title'  />
-                </div>
-                <div>
-                  <p class='movie-edit-text'>Year</p>
-                  <input type='text' name='year' placeholder='yyyy' />
-                </div>
-                <div>
-                  <p class='movie-edit-text'>Director</p>
-                  <input type='text' name='director' />
-                </div>
-              </div>
-              <div class='radio-container'>
-                <p class='movie-edit-text'>Genres</p>
-                <label for='drama' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='drama'
-                    value='1'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Drama
-                </label>
-                <label for='thriller' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='thriller'
-                    value='2'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Thriller
-                </label>
-                <label for='action' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='action'
-                    value='3'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Action
-                </label>
-                <label for='comedy' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='comedy'
-                    value='4'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Comedy
-                </label>
-                <label for='scifi' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='scifi'
-                    value='5'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Science Fiction
-                </label>
-                <label for='romance' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='romance'
-                    value='6'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Romance
-                </label>
-              </div>
+<body>
+<div class='media_container'>
+  <div class='media-block add-movies'>
+    <h1>Add Movies</h1>
+    <form action=''>
+      <div class='media_container-inner'>
+        <div class='media_movies'>
+          <div class='movie-edit'>
+            <div>
+              <p class='movie-edit-text'>Title</p>
+              <input type='text' name='title' placeholder='' />
             </div>
-            <div class='confirm-container'>
-              <input type='submit' name='confirm' class='confirm-btn' value='Confirm' />
-              <div class='invisible-object'></div>
+            <div>
+              <p class='movie-edit-text'>Year</p>
+              <input type='text' name='year' placeholder='' />
+            </div>
+            <div>
+              <p class='movie-edit-text'>Director</p>
+              <input type='text' name='director' placeholder='' />
             </div>
           </div>
+          <div class='radio-container'>
+            <p class='movie-edit-text'>Genres</p>
+            <label for='drama' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='drama'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Drama
+            </label>
+            <label for='thriller' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='thriller'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Thriller
+            </label>
+            <label for='action' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='action'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Action
+            </label>
+            <label for='comedy' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='comedy'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Comedy
+            </label>
+            <label for='scifi' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='scifi'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Science Fiction
+            </label>
+            <label for='romance' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='romance'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Romance
+            </label>
+          </div>
+        </div>
+        <div class='confirm-container'>
+          <div class='confirm-btn'>Confirm</div>
+          <div class='invisible-object'></div>
+        </div>
       </div>
-      </form>
+    </form>
+  </div>
+  <div class='media-block media_library'>
+    <h1>Media Library</h1>
+    <div class='media_container-inner'>
+      <table style='width: 100%'>
+        <tr>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Year</th>
+          <th>Genre</th>
+          <th>Update</th>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td>Director</td>
+          <td>Year</td>
+          <td>Genre</td>
+          <td>Edit</td>
+        </tr>
+      </table>
     </div>
-    <script src='js/confirm-btn.js'></script>
-    <div class='gustav_testar'>
-    <div class="media-block media_library">
-        <h1>Media Library</h1>
-        <div class="media_container-inner">
-          <table style="width: 100%">
-          <tr>
-            <th>Title</th>
-            <th>Director</th>
-            <th>Year</th>
-            <th>Genre</th>
-            <th>Update</th>
-          </tr>
-        </table>
-        </div>
-        </div>
-        </div>
-      </div>
-  </body>
+  </div>
+</div>
+<script src='js/confirm-btn.js'></script>
+</body>
 </html>
 _END;
 Get_Movies($pdo);
@@ -222,6 +231,16 @@ function Get_Movies($pdo)
                      
             
     _END;
+
+
+      //<form action='' method='post' id='delete'> lägg till i html koden med annan id!
+      //<input type='hidden' name='movieid' value='$id'>
+      //<input type='hidden' name='movietitel' value='$titel'>
+      //<input type='hidden' name='moviedirector' value='$director'>
+      //<input type='hidden' name='movieyear' value='$year'>
+      //<input type='hidden' name='moviegenre' value='$genre'>
+      //<input type='hidden' name='moviecheck' value='check'>
+      //<input type='submit' name='movieddit' value='Edit'></form>
     } 
 }
 function Add_Movie($pdo, $input)
@@ -244,6 +263,18 @@ function Add_Movie($pdo, $input)
                     $$inputholder['year'],
                     $inputholder['genre']]);
 }
+function Redirect($path) 
+    {
+        //stannar programmet och tillåter bara headers att fortsätta i koden
+        //samtidigt som en buffrar all kod som hittils körts
+        ob_start();
+        //Skrickar programmet vidare till en annan fil
+        header('Location: ' . $path);
+        //stänger av buffringen 
+        ob_end_flush();
+        //dödar programmet
+        die();
+    }
 // function Get_Genres()
 // {
 //     $query = 'SELECT * FROM genre';
