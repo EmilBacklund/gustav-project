@@ -6,9 +6,9 @@ try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PD
     //Om inta databasen nås så skapar vi en fel hantering som ger oss en felmedelningsvärde samt meddelar användaren att systemet är nere(Detta är bortom användarens kapacitet att påverka)
 catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode());
 
-if()
+// if()s
 
-function Update_Movie($input)
+function Update_Movie($pdo, $input)
 {
     $inputholder = array('titel'    => $input['titel'],
                         'director'  => $input['director'],
@@ -40,12 +40,8 @@ function Manage_String($pdo, $array)
     {
         $string = $pdo->quote($string);
         $string = Fix_String($string);
-        //return $string;
     }
-    // $string = $pdo->quote($string);
-    // $string = Fix_String($string);
-    // return $string;
-    //return $array;
+    return $array;
 }
 function Fix_String($string)
 {
