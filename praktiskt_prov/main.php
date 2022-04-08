@@ -44,127 +44,127 @@ if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) 
 }
 else{echo 'hhhhhhhhhhhhh';}
 echo <<<_END
-  <body>
-  <form method='post' action='main.php'>
-    <div class='media_container'>
-      <div class='media-block add-movies'>
-        <h1>Add Movies</h1>
-          <div class='media_container-inner'>
-            <div class='media_movies'>
-              <div class='movie-edit'>
-                <div>
-                  <p class='movie-edit-text'>Title</p>
-                  <input type='text' name='title'  />
-                </div>
-                <div>
-                  <p class='movie-edit-text'>Year</p>
-                  <input type='text' name='year' placeholder='yyyy' />
-                </div>
-                <div>
-                  <p class='movie-edit-text'>Director</p>
-                  <input type='text' name='director' />
-                </div>
-              </div>
-              <div class='radio-container'>
-                <p class='movie-edit-text'>Genres</p>
-                <label for='drama' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='drama'
-                    value='1'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Drama
-                </label>
-                <label for='thriller' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='thriller'
-                    value='2'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Thriller
-                </label>
-                <label for='action' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='action'
-                    value='3'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Action
-                </label>
-                <label for='comedy' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='comedy'
-                    value='4'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Comedy
-                </label>
-                <label for='scifi' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='scifi'
-                    value='5'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Science Fiction
-                </label>
-                <label for='romance' class='radio'>
-                  <input
-                    type='radio'
-                    name='myRadioField'
-                    id='romance'
-                    value='6'
-                    class='radio__input'
-                  />
-                  <div class='radio__radio'></div>
-                  Romance
-                </label>
-              </div>
+<body>
+<div class='media_container'>
+  <div class='media-block add-movies'>
+    <h1>Add Movies</h1>
+    <form action=''>
+      <div class='media_container-inner'>
+        <div class='media_movies'>
+          <div class='movie-edit'>
+            <div>
+              <p class='movie-edit-text'>Title</p>
+              <input type='text' name='title' placeholder='' />
             </div>
-            <div class='confirm-container'>
-              <input type='submit' name='confirm' class='confirm-btn' value='Confirm' />
-              <div class='invisible-object'></div>
+            <div>
+              <p class='movie-edit-text'>Year</p>
+              <input type='text' name='year' placeholder='' />
+            </div>
+            <div>
+              <p class='movie-edit-text'>Director</p>
+              <input type='text' name='director' placeholder='' />
             </div>
           </div>
+          <div class='radio-container'>
+            <p class='movie-edit-text'>Genres</p>
+            <label for='drama' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='drama'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Drama
+            </label>
+            <label for='thriller' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='thriller'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Thriller
+            </label>
+            <label for='action' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='action'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Action
+            </label>
+            <label for='comedy' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='comedy'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Comedy
+            </label>
+            <label for='scifi' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='scifi'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Science Fiction
+            </label>
+            <label for='romance' class='radio'>
+              <input
+                type='radio'
+                name='myRadioField'
+                id='romance'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Romance
+            </label>
+          </div>
+        </div>
+        <div class='confirm-container'>
+          <div class='confirm-btn'>Confirm</div>
+          <div class='invisible-object'></div>
+        </div>
       </div>
-      </form>
+    </form>
+  </div>
+  <div class='media-block media_library'>
+    <h1>Media Library</h1>
+    <div class='media_container-inner'>
+      <div>
+        <div class='media_header-static'>
+          <div class='static media-title'>Title</div>
+          <div class='static media-director'>Director</div>
+          <div class='static media-year'>Year</div>
+          <div class='static media-genre'>Genre</div>
+          <div class='static media-update'>Update</div>
+        </div>
+      </div>
     </div>
-    <script src='js/confirm-btn.js'></script>
-    <div class='gustav_testar'>
-    <div class="media-block media_library">
-        <h1>Media Library</h1>
-        <div class="media_container-inner">
-          <table style="width: 100%">
-          <tr>
-            <th>Title</th>
-            <th>Director</th>
-            <th>Year</th>
-            <th>Genre</th>
-            <th>Update</th>
-          </tr>
-        </table>
-        </div>
-        </div>
-        </div>
-      </div>
-  </body>
+  </div>
+</div>
+<script src='../js/confirm-btn.js'></script>
+</body>
 </html>
 _END;
 Get_Movies($pdo);
+echo <<<_END
+
+<div class="media-footer-container">
+<div class="media-footer-outer">
+<div class="media-footer-inner"></div>
+</div>
+</div>
+
+_END;
 function Manage_String($pdo, $array)
 {
     foreach ($array as $key => $string)
@@ -201,23 +201,17 @@ function Get_Movies($pdo)
         $genre = htmlspecialchars($row['genre']);
         echo <<<_END
         
-                
-        <div class='gustav_testar'>
-                    <div class='media-block media_library'>
-                    
-                        <div class='media_container-inner'>
-                        <table style='width: 100%'>
-                        <tr>
-                        <td>$titel</td>
-                        <td>$director</td>
-                        <td>$year</td>
-                        <td>$genre</td>
-                        <td>Edit</td>
-                        <input type='hidden' name='id' value='$id'>
-                        </tr>
-                        </table>
-                         </div>
-                         </div>
+                <div class="block-post-container">
+                     <div class="post-container">
+                         <div class="library-block">
+                                <div class="media-title">$titel</div>
+                                <div class="media-director">$director</div>
+                                <div class="media-year">$year</div>
+                                <div class="media-genre">$genre</div>
+                                <div class="media-edit">Edit</div>
+                                <input type='hidden' name='id' value='$id'>
+                                         </div>
+                     </div>
                 </div>
                      
             
