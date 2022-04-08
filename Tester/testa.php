@@ -75,5 +75,5 @@ function Fix_String($string)
     $string = htmlentities($string);
     return $string;
 }
-?>
 
+?>

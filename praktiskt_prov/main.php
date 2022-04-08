@@ -21,7 +21,17 @@ try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PD
     //Om inta databasen nås så skapar vi en fel hantering som ger oss en felmedelningsvärde samt meddelar användaren att systemet är nere(Detta är bortom användarens kapacitet att påverka)
 catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode());}
 
-// if(is) asd
+ if(isset($_POST['moviedelete'] $$ isset($_POST['moviecheck'])
+ {
+  seassion_start();
+  $_SESSION['titel']    = $_POST['movietitel'];
+  $_SESSION['id']       = $_POST['movieid'];
+  $_SESSION['director'] = $_POST['moviedirector'];
+  $_SESSION['year']     = $_POST['movieyear'];
+  $_SESSION['genre']    = $_POST['moviegenre'];
+  $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+  Redirect('edit.php');
+ }
 
 if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre']))
 {
@@ -34,6 +44,7 @@ if(isset($_POST['titel']) && isset($_POST['director']) && isset($_POST['year']) 
     {
         if(strlen($_POST ['year']) != 4)
         {
+            $_POST = null;
             die();
         }
         else
@@ -216,6 +227,16 @@ function Get_Movies($pdo)
                      
             
     _END;
+
+
+      //<form action='' method='post' id='delete'> lägg till i html koden med annan id!
+      //<input type='hidden' name='movieid' value='$id'>
+      //<input type='hidden' name='movietitel' value='$titel'>
+      //<input type='hidden' name='moviedirector' value='$director'>
+      //<input type='hidden' name='movieyear' value='$year'>
+      //<input type='hidden' name='moviegenre' value='$genre'>
+      //<input type='hidden' name='moviecheck' value='check'>
+      //<input type='submit' name='movieddit' value='Edit'></form>
     } 
 }
 function Add_Movie($pdo, $input)
@@ -238,6 +259,18 @@ function Add_Movie($pdo, $input)
                     $$inputholder['year'],
                     $inputholder['genre']]);
 }
+function Redirect($path) 
+    {
+        //stannar programmet och tillåter bara headers att fortsätta i koden
+        //samtidigt som en buffrar all kod som hittils körts
+        ob_start();
+        //Skrickar programmet vidare till en annan fil
+        header('Location: ' . $path);
+        //stänger av buffringen 
+        ob_end_flush();
+        //dödar programmet
+        die();
+    }
 // function Get_Genres()
 // {
 //     $query = 'SELECT * FROM genre';
