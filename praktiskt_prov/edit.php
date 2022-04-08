@@ -8,7 +8,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
 
 // if()
 
-function Update_Movie($input)
+function Update_Movie($pdo, $input)
 {
     $inputholder = array('titel'    => $input['titel'],
                         'director'  => $input['director'],
@@ -40,12 +40,8 @@ function Manage_String($pdo, $array)
     {
         $string = $pdo->quote($string);
         $string = Fix_String($string);
-        //return $string;
     }
-    // $string = $pdo->quote($string);
-    // $string = Fix_String($string);
-    // return $string;
-    //return $array;
+    return $array;
 }
 function Fix_String($string)
 {
