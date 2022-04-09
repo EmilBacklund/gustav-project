@@ -20,49 +20,33 @@ try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PD
     //i våran variabel pdo.
     //Om inta databasen nås så skapar vi en fel hantering som ger oss en felmedelningsvärde samt meddelar användaren att systemet är nere(Detta är bortom användarens kapacitet att påverka)
 catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode());}
-  if(isset($_POST['title'])) echo "Det funka!";
-  // if(isset($_POST['movieid']) && isset($_POST['moviecheck']))
-  // {
-  //   session_start();
-
-  //   $_SESSION['title']    = $_POST['movietitle'];
-  //   $_SESSION['id']       = $_POST['movieid'];
-  //   $_SESSION['director'] = $_POST['moviedirector'];
-  //   $_SESSION['year']     = $_POST['movieyear'];
-  //   $_SESSION['genre']    = $_POST['moviegenre'];
-  //   $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
-  //   Redirect('edit.php');
-  // }
-  // if(isset($_POST['title'])) echo "Det funka!";
-  // if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre']))
-  // {
-  //   echo "formulär har värden";
-  //   $spellcheck = $_POST['title'] . $_POST['director'] . $_POST ['year'] . $_POST['genre'];
-  //   if(!ctype_alnum($spellcheck))
-  //   { 
-  //     echo "innehåller fel tecken";
-  //       die();
-  //   }
-  //   elseif (strlen($_POST ['year']) !=  4)
-  //   {
-  //     echo "fel år";
-  //     $_POST = null;
-  //     die();
-  //   }
-  //   else
-  //   {
-  //     echo "Movie addad";
-  //     Add_Movie($pdo, $_POST);
-  //     $_POST = null;
-  //   }
-  // }
-  // if(isset($_SESSION)){Destroy_Sessiondata();}
-echo <<<_END
+  if(isset($_POST['movieid']) && isset($_POST['moviecheck']))
+  {
+    session_start();
+    $_SESSION['title']    = $_POST['movietitle'];
+    $_SESSION['id']       = $_POST['movieid'];
+    $_SESSION['director'] = $_POST['moviedirector'];
+    $_SESSION['year']     = $_POST['movieyear'];
+    $_SESSION['genre']    = $_POST['moviegenre'];
+    $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+    Redirect('edit.php');
+  }
+  if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year'])
+    && ctype_alnum($_POST['title']) && ctype_alnum($_POST['director']))
+  {
+    if(duplicates($pdo, $_POST['title']))
+    {
+      Add_Movie($pdo, $_POST);
+    }
+  }
+  if(isset($_SESSION)){Destroy_Sessiondata();}
+?>
 <body>
 <div class='media_container'>
   <div class='media-block add-movies'>
     <h1>Add Movies</h1>
-    <form action='' method='post'>
+    <form action='' method='post' id='form'>
       <div class='media_container-inner'>
         <div class='media_movies'>
           <div class='movie-edit'>
@@ -175,16 +159,16 @@ echo <<<_END
 <script src='../js/confirm-btn.js'></script>
 </body>
 </html>
-_END;
+<?php
   Get_Movies($pdo);
-echo <<<_END
+  ?>
 <div class="media-footer-container">
 <div class="media-footer-outer">
 <div class="media-footer-inner"></div>
 </div>
 </div>
-_END;
-  function Manage_String($pdo, $array)
+<?php
+  function Manage_Array($pdo, $array)
   {
       foreach ($array as $key => $string)
       {
@@ -192,6 +176,12 @@ _END;
           $string = Fix_String($string);
       }
       return $array;
+  }
+  function Manage_String($pdo, $string)
+  {
+        $string = $pdo->quote($string);
+        $string = Fix_String($string);
+        return $string;
   }
   function Fix_String($string)
   {
@@ -234,16 +224,6 @@ _END;
                   </div>
                 </div>     
               _END;
-
-
-      //<form action='' method='post' id='delete'> lägg till i html koden med annan id!
-      // <input type='hidden' name='movieid' value='$id'>
-      // <input type='hidden' name='movietitle' value='$title'>
-      // <input type='hidden' name='moviedirector' value='$director'>
-      // <input type='hidden' name='movieyear' value='$year'>
-      // <input type='hidden' name='moviegenre' value='$genre'>
-      // <input type='hidden' name='moviecheck' value='check'>
-      //<input type='submit' name='movieddit' value='Edit'></form>
       } 
   }
   function Add_Movie($pdo, $input)
@@ -252,7 +232,7 @@ _END;
                           'director'  => $input['director'],
                           'year'      => $input['year'],
                           'genre'     => $input['genre']);
-      $inputholder = Manage_String($pdo, $inputholder);
+      $inputholder = Manage_Array($pdo, $inputholder);
       $id = '';
       $stmt = $pdo->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
       $stmt->bindParam(1, $id,                        PDO::PARAM_INT);
@@ -263,12 +243,11 @@ _END;
       $result = $stmt->execute([$id,
                       $inputholder['title'], 
                       $inputholder['director'],
-                      $$inputholder['year'],
+                      $inputholder['year'],
                       $inputholder['genre']]);
-                      echo "la till film";
   }
   function Redirect($path) 
-      {
+  {
           //stannar programmet och tillåter bara headers att fortsätta i koden
           //samtidigt som en buffrar all kod som hittils körts
           ob_start();
@@ -278,8 +257,8 @@ _END;
           ob_end_flush();
           //dödar programmet
           die();
-      }
-    function Destroy_Sessiondata()
+  }
+  function Destroy_Sessiondata()
   {
       //förvandlar sessionens alla nycklar till en array
       $_SESSION = array();
@@ -287,5 +266,17 @@ _END;
       setcookie(session_name(), '', time() - 2592000, '/');
       //Förstör alla värden i våran session array
       session_destroy(); 
+  }
+  function duplicates($pdo, $check)
+  {
+    $holder = Manage_String($pdo, $check);
+    $stmt = $pdo->prepare('SELECT * FROM movies WHERE title=?');
+    $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
+    $stmt->execute([$holder]);
+    $result = $stmt;
+    if($result->rowCount())
+    {
+      return false;
+    }
   }
 ?>
