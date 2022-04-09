@@ -56,6 +56,7 @@
         Destroy_Sessiondata();
         Redirect('main.php');
     }
+    echo $_SESSION['title'];
     Destroy_Sessiondata();
     function Update_Movie($pdo, $input, $id)
     {
@@ -81,7 +82,7 @@
     function Delete_Movie($pdo, $input)
     {
         $holder = Manage_String($pdo, $input);
-        $query = "DELETE FROM movies WHERE id=$holder";
+        $query = "DELETE FROM movies WHERE id='$holder'";
         $result = $pdo->query($query);
     }
     function Manage_Array($pdo, $array)
