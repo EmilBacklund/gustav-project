@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -14,7 +15,6 @@ body {
   max-width: 864px;
   display: flex;
   flex-direction: column;
-  gap: 80px;
 }
 
 .gustav_testar {
@@ -28,19 +28,17 @@ body {
 .media-block {
   background-color: #161d2e;
   padding: 20px;
-  padding-bottom: 5px;
-  border-radius: 10px;
 }
 
 .testar-gustav {
   background-color: #161d2e;
   padding: 40px;
-  padding-bottom: 0px;
   border-radius: 10px;
 }
 
 .add-movies {
-  margin-top: 80px;
+  margin-top: 40px;
+  border-radius: 10px 10px 0 0;
 }
 
 .media_container-inner {
@@ -95,6 +93,7 @@ body {
   justify-content: space-between;
   flex: 1;
   min-width: 220px;
+  position: relative;
 }
 
 .movie-edit-text {
@@ -131,6 +130,77 @@ body {
 .confirm-container {
   display: flex;
   gap: 60px;
+}
+
+.media_header-static {
+  display: flex;
+  justify-content: space-around;
+}
+
+.media-title {
+  width: 35%;
+}
+
+.media-director {
+  width: 30%;
+}
+
+.media-year {
+  width: 8%;
+}
+
+.media-genre {
+  width: 15%;
+}
+
+.media-update {
+  width: 12%;
+}
+
+.library-block {
+  display: flex;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.media_library {
+  padding-bottom: 0;
+}
+
+.media_library .media_container-inner {
+  border-radius: 10px 10px 0 0;
+  font-weight: 700;
+}
+
+.post-container {
+  background-color: #262f43;
+  padding: 5px 20px;
+}
+
+.block-post-container {
+  background-color: #161d2e;
+  padding: 0 20px 0 20px;
+  margin: 0 auto;
+  max-width: 864px;
+  box-sizing: border-box;
+}
+
+.media-footer-container {
+  margin: 0 auto;
+  max-width: 864px;
+  box-sizing: border-box;
+}
+
+.media-footer-outer {
+  background-color: #161d2e;
+  padding: 0 20px 20px 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.media-footer-inner {
+  background-color: #262f43;
+  padding: 0 20px 10px 20px;
+  border-radius: 0 0 10px 10px;
 }
 
 @media screen and (max-width: 619px) {

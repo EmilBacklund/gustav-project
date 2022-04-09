@@ -31,7 +31,7 @@ function Add_Movie($pdo, $input)
 
     foreach ($test as $item)
     {
-        echo $item . "<br>";
+        echo $item . '<br>';
     }
 
     // $test = array('titel'    => $input['titel'],
@@ -75,4 +75,5 @@ function Fix_String($string)
     $string = htmlentities($string);
     return $string;
 }
+
 ?>

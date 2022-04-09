@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/radio.css" />
+    <link rel="stylesheet" href="css/smileyface.css" />
   </head>
   <body>
     <div class="media_container">
@@ -36,6 +37,14 @@
                 </div>
               </div>
               <div class="radio-container">
+                <div class="face-container">
+                  <div class="face">
+                    <div class="eyes">
+                      <div class="eye"></div>
+                      <div class="eye"></div>
+                    </div>
+                  </div>
+                </div>
                 <p class="movie-edit-text">Genres</p>
                 <label for="drama" class="radio">
                   <input
@@ -109,25 +118,19 @@
       <div class="media-block media_library">
         <h1>Media Library</h1>
         <div class="media_container-inner">
-          <table style="width: 100%">
-            <tr>
-              <th>Title</th>
-              <th>Director</th>
-              <th>Year</th>
-              <th>Genre</th>
-              <th>Update</th>
-            </tr>
-            <tr>
-              <td>Title</td>
-              <td>Director</td>
-              <td>Year</td>
-              <td>Genre</td>
-              <td>Edit</td>
-            </tr>
-          </table>
+          <div>
+            <div class="media_header-static">
+              <div class="static media-title">Title</div>
+              <div class="static media-director">Director</div>
+              <div class="static media-year">Year</div>
+              <div class="static media-genre">Genre</div>
+              <div class="static media-update">Update</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <script src="js/confirm-btn.js"></script>
+    <script src="js/smileyface.js"></script>
   </body>
 </html>
