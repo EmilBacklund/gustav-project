@@ -63,7 +63,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
             </div>
             <div>
               <p class='movie-edit-text'>Year</p>
-              <input type='text' name='year' placeholder='YYYY' />
+              <input class="validate-year" onkeypress='validateYear(event)' type='text' name='year' placeholder='YYYY' />
               <?php
                 if(isset($_POST['year']) && strlen($_POST['year']) !== 4)
                 {
@@ -191,6 +191,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   </div>
 </div>
 <script src='../js/confirm-btn.js'></script>
+<script src='../js/validate-search.js'></script>
 </body>
 </html>
 <?php
