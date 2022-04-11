@@ -53,46 +53,45 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
             <div>
               <p class='movie-edit-text'>Title</p>
               <input type='text' name='title' placeholder='' />
+              <?php
+                if(isset($_POST['title']) && strlen($_POST['title']) < 1)
+                {
+                    echo "<div class='form-error' id='titleError'>
+                    Please enter a Titel </div>";
+                }
+                ?>
             </div>
             <div>
               <p class='movie-edit-text'>Year</p>
               <input type='text' name='year' placeholder='YYYY' />
+              <?php
+                if(isset($_POST['year']) && strlen($_POST['year']) < 4)
+                {
+                    echo "<div class='form-error' id='titleError'>
+                    Please enter a valid year 'YYYY' </div>";
+                }
+                ?>
             </div>
             <div>
               <p class='movie-edit-text'>Director</p>
               <input type='text' name='director' placeholder='' />
+              <?php
+                if(isset($_POST['director']) && strlen($_POST['director']) < 1)
+                {
+                    echo "<div class='form-error' id='titleError'>
+                    Please enter a Director </div>";
+                }
+                ?>
             </div>
           </div>
           <div class='radio-container'>
             <p class='movie-edit-text'>Genres</p>
-            <label for='drama' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='drama'
-                value='1'
-                class='radio__input'
-              />
-              <div class='radio__radio'></div>
-              Drama
-            </label>
-            <label for='thriller' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='thriller'
-                value='2'
-                class='radio__input'
-              />
-              <div class='radio__radio'></div>
-              Thriller
-            </label>
             <label for='action' class='radio'>
               <input
                 type='radio'
                 name='genre'
                 id='action'
-                value='3'
+                value='1'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
@@ -103,11 +102,33 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
                 type='radio'
                 name='genre'
                 id='comedy'
-                value='4'
+                value='2'
                 class='radio__input'
               />
               <div class='radio__radio'></div>
               Comedy
+            </label>
+            <label for='drama' class='radio'>
+              <input
+                type='radio'
+                name='genre'
+                id='drama'
+                value='3'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Drama
+            </label>
+            <label for='fantasy' class='radio'>
+              <input
+                type='radio'
+                name='genre'
+                id='fantasy'
+                value='4'
+                class='radio__input'
+              />
+              <div class='radio__radio'></div>
+              Fantasy
             </label>
             <label for='scifi' class='radio'>
               <input
@@ -120,17 +141,17 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
               <div class='radio__radio'></div>
               Science Fiction
             </label>
-            <label for='romance' class='radio'>
+            <label for='thriller' class='radio'>
               <input
                 type='radio'
                 name='genre'
-                id='romance'
+                id='thriller'
                 value='6'
                 checked="checked"
                 class='radio__input'
               />
               <div class='radio__radio'></div>
-              Romance
+              Thriller
             </label>
           </div>
         </div>
@@ -151,7 +172,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           <div class='static media-director'>Director</div>
           <div class='static media-year'>Year</div>
           <div class='static media-genre'>Genre</div>
-          <div class='static media-update'>Update</div>
+          <div class='static media-update'>Edit</div>
         </form>
         </div>
       </div>
