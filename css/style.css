@@ -222,6 +222,10 @@ body {
   color: transparent;
 }
 
+.modal form {
+  display: contents;
+}
+
 @media screen and (max-width: 619px) {
   .radio {
     margin-bottom: 16px;

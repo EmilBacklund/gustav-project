@@ -312,7 +312,7 @@ else {
                  <input type='hidden' name='movieyear' value='$year'>
                  <input type='hidden' name='moviegenre' value='$genre'>
                  <input type='hidden' name='moviecheck' value='check'>
-                 <input type='submit' value='Edit'></form>
+                 <input class="library-block-edit edit-image" type='submit' value='Edit'></form>
                </div>
              </div>
            </div>     
