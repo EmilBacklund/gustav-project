@@ -91,7 +91,6 @@ body {
   line-height: 40px;
   cursor: pointer;
   letter-spacing: 2px;
-  transition: all 0.45s ease;
   user-select: none;
   border: none;
   color: #fff;
@@ -132,10 +131,6 @@ body {
 
 .confirm-btn:hover {
   background-color: #3454a0;
-}
-
-.confirm-btn.active {
-  box-shadow: 0px 0px 50px 14px #3454a0;
 }
 
 .confirm-container {

@@ -75,8 +75,9 @@
           <?php
         echo "<h1>Edit Movie '$movietitel'</h1>";
         ?>
-        <form method='post' action=''>
-        <div class="media_container-inner">
+         <div class="media_container-inner">
+           <form method='post' action=''>
+
           <div class="media_movies">
             <div class="movie-edit">
               <div>
@@ -95,7 +96,7 @@
               <div>
                 <p class="movie-edit-text">Year</p>
                 <?php
-                echo "<input id='year' type='text' name='year' value='$movieyear' />"
+                echo "<input class='validate-year' onkeypress='validateYear(event)' id='year' type='text' name='year' value='$movieyear' />"
                 ?>
                 <?php
                 if(isset($_POST['year']) && strlen($_POST['year']) < 4)
@@ -144,7 +145,8 @@
                 type="submit"
                 class="delete-btn"
               />
-            </form>
+             </form>
+            </div>
             <div class="modal" id="modal">
               <div data-close-button class="close-button">&times</div>
               <div class="modal-body">
@@ -180,6 +182,8 @@
     </div>
     <script src="../js/delete-movie.js"></script>
     <script src="../js/smileyface.js"></script>
+    <script src='../js/validate-search.js'></script>
+
   </body>
   </html>
     <?php
