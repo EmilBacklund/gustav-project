@@ -190,7 +190,6 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     </div>
   </div>
 </div>
-<script src='../js/confirm-btn.js'></script>
 <script src='../js/validate-search.js'></script>
 </body>
 </html>
