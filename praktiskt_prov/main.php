@@ -65,7 +65,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
               <p class='movie-edit-text'>Year</p>
               <input class="validate-year" onkeypress='validateYear(event)' type='text' name='year' placeholder='YYYY' />
               <?php
-                if(isset($_POST['year']) && strlen($_POST['year']) < 4)
+                if(isset($_POST['year']) && strlen($_POST['year']) !== 4)
                 {
                     echo "<div class='form-error' id='titleError'>
                     Please enter a valid year 'YYYY' </div>";
