@@ -1,4 +1,20 @@
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/radio.css" />
+    <link rel="stylesheet" href="css/edit-movie.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 <?php
     require_once 'logindata.php';
     try{$pdo = new PDO($attr, $user, $pass, $opts);} //Ett försök att skapa ett PDO gränssnitt med variabelvärden från logindata.php där värderna sparas
@@ -35,20 +51,12 @@
                     'year'      => $_SESSION['year'],
                     'genre'     => $_SESSION['genre']);
     
-    if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre']))
+    if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
     {
-    
-        $spellcheck = $_POST['title'] . $_POST['director'] . $_POST ['year'] . $_POST['genre'];
-        if(ctype_alnum($spellcheck))
-        {
-            Update_Movie($pdo, $_POST, $movie['id']);
-            Destroy_Sessiondata();
-            Redirect('main.php');
-        }
-        else
-        {
-            echo "får bara inehålla a-zA-Z0-9 samt 4 tecken";
-        }
+        Update_Movie($pdo, $_POST, $movie['id']);
+        Destroy_Sessiondata();
+        Redirect('main.php');
     }
     if(isset($_POST['delete']))
     {
@@ -58,6 +66,11 @@
     }
     echo $_SESSION['title'];
     Destroy_Sessiondata();
+    ?>
+
+
+
+    <?php
     function Update_Movie($pdo, $input, $id)
     {
     $inputholder = array('title'    => $input['title'],
