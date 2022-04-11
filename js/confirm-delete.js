@@ -8,7 +8,6 @@ const directorError = document.querySelector("#directorError");
 const overlay = document.getElementById("overlay");
 const modalSelection = document.querySelector(".modal");
 const closeModalButtons = document.querySelectorAll("[data-close-button]");
-console.log(form);
 
 function validateDelete() {
   event.preventDefault();
@@ -18,7 +17,7 @@ function validateDelete() {
   } else {
     titleError.style.display = "block";
   }
-  if (checkLength(year.value, 3) === true) {
+  if (checkLengthYear(year.value, 4) === true) {
     yearError.style.display = "none";
   } else {
     yearError.style.display = "block";
@@ -39,6 +38,14 @@ function validateDelete() {
 }
 
 form.addEventListener("submit", validateDelete);
+
+function checkLengthYear(value, len) {
+  if (value.trim().length === len && typeof year.value === "number") {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function checkLength(value, len) {
   if (value.trim().length > len) {
