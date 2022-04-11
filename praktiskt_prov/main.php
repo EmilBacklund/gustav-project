@@ -136,23 +136,32 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
         </div>
         <div class='confirm-container'>
           <input type='submit' class='confirm-btn' value='Add Movie' > 
-          <div class='invisible-object'></div>
+          <div class="search-movie-container">
+            <input placeholder="Search Movie.." type="search" id="site-search" name="q" class="search-bar">
+            <input type="submit" value="Search" class="search-movie">
+          </div>
         </div>
       </div>
     </form>
   </div>
-  <form action='' method='post'>
   <div class='media-block media_library'>
     <h1>Media Library</h1>
     <div class='media_container-inner'>
       <div>
         <div class='media_header-static'>
-          <div class='static media-title'>Title</div>
-          <div class='static media-director'>Director</div>
-          <div class='static media-year'>Year</div>
-          <div class='static media-genre'>Genre</div>
-          <div class='static media-update'>Update</div>
-        </form>
+          <form method="post" class="static-form" action="">
+            <input type="submit" value='Title' name='sort' class="static media-title">
+          </form>
+          <form method="post" action="" class="static-form">
+            <input type="submit" value='Director' name='sort' class="static media-director">
+          </form>
+          <form method="post" action="" class="static-form">
+            <input type="submit" value='Year' name='sort' class="static media-year">
+          </form>
+          <form method="post" action="" class="static-form">
+            <input type="submit" value='Genre' name='sort' class="static media-genre">
+          </form>
+          <div class='media-update'>Update</div>
         </div>
       </div>
     </div>
