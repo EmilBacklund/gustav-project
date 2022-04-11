@@ -197,7 +197,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
 <?php
 if(isset($_POST['sort']))
 {
-  $sort = $_POST['sort'];
+  $sort = strtolower($_POST['sort']);
   get_sortedmovies($pdo, $sort);
 }
 elseif(isset($_POST['search']))
@@ -242,7 +242,7 @@ else {
   }
   function Get_Movies($pdo)
   {
-      $query = 'SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id';
+      $query = 'SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id';
       $result = $pdo->query($query);
       while ($row = $result->fetch())
       {
@@ -304,7 +304,7 @@ else {
   }
   function get_sortedmovies($pdo, $order)
   {
-      $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY '$order'";
+      $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY $order";
       $result = $pdo->query($query);
       while ($row = $result->fetch())
       {
@@ -313,11 +313,10 @@ else {
   }
   function get_search($pdo, $search)
   {
-      $holder = Manage_String($pdo, $search);
-      $stmt = $pdo->prepare("SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id WHERE MATCH(title, director, genre) AGAINST(?)");
-      $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
-      $stmt->execute([$holder]);
-      $result = $stmt;
+      $holder = Fix_String($search);
+      $query = "SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id WHERE CONCAT_WS('', title, director, genre) like '%$holder%'";
+      $result = $pdo->query($query);
+
       while ($row = $result->fetch())
       {
         printmovies($row['id'], $row['title'], $row['director'], $row['year'], $row['genre']);

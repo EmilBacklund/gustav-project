@@ -17,23 +17,9 @@ body {
   flex-direction: column;
 }
 
-.gustav_testar {
-  margin: 0 auto;
-  max-width: 864px;
-  display: grid;
-  flex-direction: column;
-  gap: 500px;
-}
-
 .media-block {
   background-color: #161d2e;
   padding: 20px;
-}
-
-.testar-gustav {
-  background-color: #161d2e;
-  padding: 40px;
-  border-radius: 10px;
 }
 
 .add-movies {
@@ -42,12 +28,6 @@ body {
 }
 
 .media_container-inner {
-  padding: 20px;
-  background-color: #262f43;
-  border-radius: 10px;
-}
-
-.gustavs_inre {
   padding: 20px;
   background-color: #262f43;
   border-radius: 10px;
