@@ -24,7 +24,6 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   // if(isset($_POST['movieid']) && isset($_POST['moviecheck']))
   // {
   //   session_start();
-
   //   $_SESSION['title']    = $_POST['movietitle'];
   //   $_SESSION['id']       = $_POST['movieid'];
   //   $_SESSION['director'] = $_POST['moviedirector'];
@@ -229,7 +228,8 @@ _END;
                       <input type='hidden' name='movieyear' value='$year'>
                       <input type='hidden' name='moviegenre' value='$genre'>
                       <input type='hidden' name='moviecheck' value='check'>
-                      <input type='submit' value='Edit'></form>
+                      <input class="library-block-edit edit-image" type='submit' value='Edit'>
+                      </form>
                     </div>
                   </div>
                 </div>     
