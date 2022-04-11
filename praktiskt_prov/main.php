@@ -46,7 +46,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
 <div class='media_container'>
   <div class='media-block add-movies'>
     <h1>Add Movies</h1>
-    <form action='' method='post' id='form'>
+    <form action='' method='post'>
       <div class='media_container-inner'>
         <div class='media_movies'>
           <div class='movie-edit'>
@@ -313,7 +313,7 @@ else {
   function get_search($pdo, $search)
   {
       $holder = Fix_String($search);
-      $query = "SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id WHERE CONCAT_WS('', title, director, genre) like '%$holder%'";
+      $query = "SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id WHERE CONCAT_WS('', title, director, genre, year) like '%$holder%'";
       $result = $pdo->query($query);
 
       while ($row = $result->fetch())
