@@ -32,14 +32,14 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     Redirect('edit.php');
   }
   
-  if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
-    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
-  {
-    if(duplicates($pdo, $_POST['title']) == true)
-    {
-      Add_Movie($pdo, $_POST);
-    }
-  }
+  // if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+  //   && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
+  // {
+  //   if(duplicates($pdo, $_POST['title']) == true)
+  //   {
+  //     Add_Movie($pdo, $_POST);
+  //   }
+  // }
   if(isset($_SESSION)){Destroy_Sessiondata();}
 ?>
 <body>
@@ -52,7 +52,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           <div class='movie-edit'>
             <div>
               <p class='movie-edit-text'>Title</p>
-              <input type='text' name='title' placeholder='' />
+              <input type='text' name='title' />
               <?php
                 if(isset($_POST['title']) && strlen($_POST['title']) < 1)
                 {
@@ -74,7 +74,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
             </div>
             <div>
               <p class='movie-edit-text'>Director</p>
-              <input type='text' name='director' placeholder='' />
+              <input type='text' name='director' />
               <?php
                 if(isset($_POST['director']) && strlen($_POST['director']) < 1)
                 {
@@ -87,77 +87,55 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           <div class='radio-container'>
             <p class='movie-edit-text'>Genres</p>
             <label for='action' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='action'
-                value='1'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='action' value='1' class='radio__input'/>
               <div class='radio__radio'></div>
               Action
             </label>
             <label for='comedy' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='comedy'
-                value='2'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='comedy' value='2' class='radio__input'/>
               <div class='radio__radio'></div>
               Comedy
             </label>
             <label for='drama' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='drama'
-                value='3'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='drama' value='3' class='radio__input'/>
               <div class='radio__radio'></div>
               Drama
             </label>
             <label for='fantasy' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='fantasy'
-                value='4'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='fantasy' value='4' class='radio__input' />
               <div class='radio__radio'></div>
               Fantasy
             </label>
             <label for='scifi' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='scifi'
-                value='5'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='scifi' value='5' class='radio__input' />
               <div class='radio__radio'></div>
               Science Fiction
             </label>
             <label for='thriller' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='thriller'
-                value='6'
-                checked="checked"
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='thriller' value='6' checked="checked" class='radio__input' />
               <div class='radio__radio'></div>
               Thriller
             </label>
           </div>
         </div>
         <div class='confirm-container'>
-          <input type='submit' class='confirm-btn' value='Add Movie' >
+          <input type='submit' class='confirm-btn' value='Add Movie'>
           </form>
+          <?php
+          if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+          && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
+          {
+            if(duplicates($pdo, $_POST['title']) == true)
+            {
+              Add_Movie($pdo, $_POST);
+            }
+            else
+            {
+              echo "<div class='form-error' id='titleError'>
+              That movie already exists </div>";
+            }
+          }
+          ?>
           <form method="post" action="">
           <div class="search-movie-container">
             <input placeholder="Search Movie.." type="search" id="site-search" name="search" class="search-bar">
@@ -191,6 +169,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   </div>
 </div>
 <script src='../js/validate-search.js'></script>
+<script src='../js/confirm-btn.js'></script>
 </body>
 </html>
 <?php
