@@ -31,11 +31,11 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
     Redirect('edit.php');
   }
+  
   if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
-    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year'])
-    && ctype_alnum($_POST['title']) && ctype_alnum($_POST['director']))
+    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
   {
-    if(duplicates($pdo, $_POST['title']))
+    if(duplicates($pdo, $_POST['title']) == true)
     {
       Add_Movie($pdo, $_POST);
     }
@@ -141,6 +141,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
       </div>
     </form>
   </div>
+  <form action='' method='post'>
   <div class='media-block media_library'>
     <h1>Media Library</h1>
     <div class='media_container-inner'>
@@ -151,6 +152,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           <div class='static media-year'>Year</div>
           <div class='static media-genre'>Genre</div>
           <div class='static media-update'>Update</div>
+        </form>
         </div>
       </div>
     </div>
@@ -160,7 +162,19 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
 </body>
 </html>
 <?php
+if(isset($_POST['sort']))
+{
+  $sort = $_POST['sort'];
+  get_sortedmovies($pdo, $sort);
+}
+elseif(isset($_POST['search']))
+{
+  $search = $_POST['search'];
+  get_search($pdo, $search);
+}
+else {
   Get_Movies($pdo);
+}
   ?>
 <div class="media-footer-container">
 <div class="media-footer-outer">
@@ -199,31 +213,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
       $result = $pdo->query($query);
       while ($row = $result->fetch())
       {
-          $id = htmlspecialchars($row['id']);
-          $title = htmlspecialchars($row['title']);
-          $director = htmlspecialchars($row['director']);
-          $year = htmlspecialchars($row['year']);
-          $genre = htmlspecialchars($row['genre']);
-        echo <<<_END
-                <div class="block-post-container">
-                  <div class="post-container">
-                    <div class="library-block">
-                      <div class="media-title">$title</div>
-                      <div class="media-director">$director</div>
-                      <div class="media-year">$year</div>
-                      <div class="media-genre">$genre</div>
-                      <form action='' method='post'>
-                      <input type='hidden' name='movieid' value='$id'>
-                      <input type='hidden' name='movietitle' value='$title'>
-                      <input type='hidden' name='moviedirector' value='$director'>
-                      <input type='hidden' name='movieyear' value='$year'>
-                      <input type='hidden' name='moviegenre' value='$genre'>
-                      <input type='hidden' name='moviecheck' value='check'>
-                      <input type='submit' value='Edit'></form>
-                    </div>
-                  </div>
-                </div>     
-              _END;
+        printmovies($row['id'], $row['title'], $row['director'], $row['year'], $row['genre']);
       } 
   }
   function Add_Movie($pdo, $input)
@@ -270,7 +260,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   function duplicates($pdo, $check)
   {
     $holder = Manage_String($pdo, $check);
-    $stmt = $pdo->prepare('SELECT * FROM movies WHERE title=?');
+    $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
     $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
     $stmt->execute([$holder]);
     $result = $stmt;
@@ -278,5 +268,54 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     {
       return false;
     }
+  }
+  function get_sortedmovies($pdo, $order)
+  {
+      $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY '$order'";
+      $result = $pdo->query($query);
+      while ($row = $result->fetch())
+      {
+        printmovies($row['id'], $row['title'], $row['director'], $row['year'], $row['genre']);
+      } 
+  }
+  function get_search($pdo, $search)
+  {
+      $holder = Manage_String($pdo, $search);
+      $stmt = $pdo->prepare("SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id WHERE MATCH(title, director, genre) AGAINST(?)");
+      $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
+      $stmt->execute([$holder]);
+      $result = $stmt;
+      while ($row = $result->fetch())
+      {
+        printmovies($row['id'], $row['title'], $row['director'], $row['year'], $row['genre']);
+      } 
+  }
+  function printmovies($id, $title, $director, $year, $genre)
+  {
+    $id = htmlspecialchars($id);
+    $title = htmlspecialchars($title);
+    $director = htmlspecialchars($director);
+    $year = htmlspecialchars($year);
+    $genre = htmlspecialchars($genre);
+   echo <<<_END
+           <div class="block-post-container">
+             <div class="post-container">
+               <div class="library-block">
+                 <div class="media-title">$title</div>
+                 <div class="media-director">$director</div>
+                 <div class="media-year">$year</div>
+                 <div class="media-genre">$genre</div>
+                 <form action='' method='post'>
+                 <input type='hidden' name='movieid' value='$id'>
+                 <input type='hidden' name='movietitle' value='$title'>
+                 <input type='hidden' name='moviedirector' value='$director'>
+                 <input type='hidden' name='movieyear' value='$year'>
+                 <input type='hidden' name='moviegenre' value='$genre'>
+                 <input type='hidden' name='moviecheck' value='check'>
+                 <input type='submit' value='Edit'></form>
+               </div>
+             </div>
+           </div>     
+         _END;
   }
 ?>
