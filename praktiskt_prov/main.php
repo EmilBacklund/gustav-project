@@ -156,9 +156,11 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           </div>
         </div>
         <div class='confirm-container'>
-          <input type='submit' class='confirm-btn' value='Add Movie' > 
+          <input type='submit' class='confirm-btn' value='Add Movie' >
+          </form>
+          <form method="post" action="">
           <div class="search-movie-container">
-            <input placeholder="Search Movie.." type="search" id="site-search" name="q" class="search-bar">
+            <input placeholder="Search Movie.." type="search" id="site-search" name="search" class="search-bar">
             <input type="submit" value="Search" class="search-movie">
           </div>
         </div>
