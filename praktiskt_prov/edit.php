@@ -77,7 +77,6 @@
         ?>
          <div class="media_container-inner">
            <form method='post' action=''>
-
           <div class="media_movies">
             <div class="movie-edit">
               <div>
@@ -135,9 +134,9 @@
               ?>
             </div>
           </div>
-        </form>
           <div class="confirm-container">
             <input value="Apply" type="submit" class="apply-btn" />
+            </form>
             <form id="deleteConfirm" action="">
               <input
                 data-modal-target="#modal"

@@ -32,27 +32,24 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     Redirect('edit.php');
   }
   
-  if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
-    && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
-  {
-    if(duplicates($pdo, $_POST['title']) == true)
-    {
-      Add_Movie($pdo, $_POST);
-    }
-  }
+  // if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+  //   && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
+  // {
+  //   duplicates($pdo, $_POST['title'], $_POST);
+  // }
   if(isset($_SESSION)){Destroy_Sessiondata();}
 ?>
 <body>
 <div class='media_container'>
   <div class='media-block add-movies'>
     <h1>Add Movies</h1>
-    <form action='' method='post' id='form'>
+    <form action='' method='post'>
       <div class='media_container-inner'>
         <div class='media_movies'>
           <div class='movie-edit'>
             <div>
               <p class='movie-edit-text'>Title</p>
-              <input type='text' name='title' placeholder='' />
+              <input type='text' name='title' />
               <?php
                 if(isset($_POST['title']) && strlen($_POST['title']) < 1)
                 {
@@ -65,7 +62,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
               <p class='movie-edit-text'>Year</p>
               <input class="validate-year" onkeypress='validateYear(event)' type='text' name='year' placeholder='YYYY' />
               <?php
-                if(isset($_POST['year']) && strlen($_POST['year']) < 4)
+                if(isset($_POST['year']) && strlen($_POST['year']) !== 4)
                 {
                     echo "<div class='form-error' id='titleError'>
                     Please enter a valid year 'YYYY' </div>";
@@ -74,7 +71,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
             </div>
             <div>
               <p class='movie-edit-text'>Director</p>
-              <input type='text' name='director' placeholder='' />
+              <input type='text' name='director' />
               <?php
                 if(isset($_POST['director']) && strlen($_POST['director']) < 1)
                 {
@@ -87,77 +84,47 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           <div class='radio-container'>
             <p class='movie-edit-text'>Genres</p>
             <label for='action' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='action'
-                value='1'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='action' value='1' class='radio__input'/>
               <div class='radio__radio'></div>
               Action
             </label>
             <label for='comedy' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='comedy'
-                value='2'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='comedy' value='2' class='radio__input'/>
               <div class='radio__radio'></div>
               Comedy
             </label>
             <label for='drama' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='drama'
-                value='3'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='drama' value='3' class='radio__input'/>
               <div class='radio__radio'></div>
               Drama
             </label>
             <label for='fantasy' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='fantasy'
-                value='4'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='fantasy' value='4' class='radio__input' />
               <div class='radio__radio'></div>
               Fantasy
             </label>
             <label for='scifi' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='scifi'
-                value='5'
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='scifi' value='5' class='radio__input' />
               <div class='radio__radio'></div>
               Science Fiction
             </label>
             <label for='thriller' class='radio'>
-              <input
-                type='radio'
-                name='genre'
-                id='thriller'
-                value='6'
-                checked="checked"
-                class='radio__input'
-              />
+              <input type='radio' name='genre' id='thriller' value='6' checked="checked" class='radio__input' />
               <div class='radio__radio'></div>
               Thriller
             </label>
           </div>
         </div>
         <div class='confirm-container'>
-          <input type='submit' class='confirm-btn' value='Add Movie' >
+          <input type='submit' class='confirm-btn' value='Add Movie'>
           </form>
+          <?php
+          if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
+          && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
+          {
+              Add_Movie($pdo, $_POST);
+          }
+          ?>
           <form method="post" action="">
           <div class="search-movie-container">
             <input placeholder="Search Movie.." type="search" id="site-search" name="search" class="search-bar">
@@ -191,12 +158,13 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   </div>
 </div>
 <script src='../js/validate-search.js'></script>
+<script src='../js/confirm-btn.js'></script>
 </body>
 </html>
 <?php
 if(isset($_POST['sort']))
 {
-  $sort = $_POST['sort'];
+  $sort = strtolower($_POST['sort']);
   get_sortedmovies($pdo, $sort);
 }
 elseif(isset($_POST['search']))
@@ -256,6 +224,16 @@ else {
                           'genre'     => $input['genre']);
       $inputholder = Manage_Array($pdo, $inputholder);
       $id = '';
+      // $title = $inputholder['title'];
+      // $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
+      // $stmt->bindParam(1, $title,      PDO::PARAM_STR, 128);
+      // $result = $stmt->execute([$title]);
+      // if($result  1)
+      // {
+      //   echo "finns redan";
+      // }
+      // else{
+
       $stmt = $pdo->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
       $stmt->bindParam(1, $id,                        PDO::PARAM_INT);
       $stmt->bindParam(2, $inputholder['title'],      PDO::PARAM_STR, 128);
@@ -267,6 +245,7 @@ else {
                       $inputholder['director'],
                       $inputholder['year'],
                       $inputholder['genre']]);
+      // }
   }
   function Redirect($path) 
   {
@@ -289,21 +268,23 @@ else {
       //Förstör alla värden i våran session array
       session_destroy(); 
   }
-  function duplicates($pdo, $check)
-  {
-    $holder = Manage_String($pdo, $check);
-    $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
-    $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
-    $stmt->execute([$holder]);
-    $result = $stmt;
-    if($result->rowCount())
-    {
-      return false;
-    }
-  }
+  // function duplicates($pdo, $check, $post)
+  // {
+  //   $holder = Manage_String($pdo, $check);
+  //   $stmt = $pdo->prepare('SELECT titel FROM movies WHERE title="?"');
+  //   $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
+  //   $stmt->execute([$holder]);
+  //   $result = $stmt;
+  //   if($result === $
+  //   {
+  //     echo "Title already excist";
+  //   }
+  //   else{Add_Movie($pdo, $_POST);}
+    
+  // }
   function get_sortedmovies($pdo, $order)
   {
-      $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY '$order'";
+      $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY $order";
       $result = $pdo->query($query);
       while ($row = $result->fetch())
       {
@@ -312,11 +293,10 @@ else {
   }
   function get_search($pdo, $search)
   {
-      $holder = Manage_String($pdo, $search);
-      $stmt = $pdo->prepare("SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id WHERE MATCH(title, director, genre) AGAINST(?)");
-      $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
-      $stmt->execute([$holder]);
-      $result = $stmt;
+      $holder = Fix_String($search);
+      $query = "SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id WHERE CONCAT_WS('', title, director, genre, year) like '%$holder%'";
+      $result = $pdo->query($query);
+
       while ($row = $result->fetch())
       {
         printmovies($row['id'], $row['title'], $row['director'], $row['year'], $row['genre']);
