@@ -196,3 +196,7 @@
   width: 50%;
   display: contents;
 }
+
+.add-movies {
+  border-radius: 10px;
+}
