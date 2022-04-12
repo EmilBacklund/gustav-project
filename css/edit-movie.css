@@ -37,10 +37,6 @@
   background-color: #3454a0;
 }
 
-.apply-btn.active {
-  box-shadow: 0px 0px 50px 14px #3454a0;
-}
-
 .delete-btn:hover {
   background-color: #9f2a2a;
 }
@@ -155,18 +151,16 @@
   text-align: center;
 }
 
-.modal_inform-text {
-  font-size: 30px;
-  color: #636363;
-  text-align: center;
-}
-
 .modal__delete-cancel {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
+
+/* Modal avslutas */
+
+/* overlay som syns när man får upp modalen */
 
 #overlay {
   position: fixed;
@@ -184,6 +178,8 @@
   pointer-events: all;
   opacity: 1;
 }
+
+/* stylingen felmeddelandet om man slår in fel värden */
 
 .form-error {
   color: #f6050d;

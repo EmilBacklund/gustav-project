@@ -1,3 +1,7 @@
+/* 
+Targetar root med "*" för att sätta en annan standard på alla element 
+*/
+
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +36,10 @@ body {
   background-color: #262f43;
   border-radius: 10px;
 }
+
+/* 
+Flex wrap för att få mer responsiveness
+*/
 
 .media_movies {
   display: flex;
@@ -133,6 +141,10 @@ body {
   background-color: #3454a0;
 }
 
+/* 
+Flex wrap för att få mer responsiveness
+*/
+
 .confirm-container {
   display: flex;
   gap: 60px;
@@ -161,10 +173,6 @@ body {
 
 .static:hover {
   border: 1px solid #fff;
-}
-
-.static-form {
-  display: contents;
 }
 
 .media-title {
@@ -255,7 +263,20 @@ body {
   color: transparent;
 }
 
+/* 
+Har vart tvungen att sätta "display: contents" på forms för att få
+designen att se ut som jag vill.
+*/
+
 .modal form {
+  display: contents;
+}
+
+.confirm-container form {
+  display: contents;
+}
+
+.static-form {
   display: contents;
 }
 
@@ -266,9 +287,9 @@ body {
   font-weight: 400;
 }
 
-.confirm-container form {
-  display: contents;
-}
+/* 
+Använder Media Queries för att göra "Add Movies" sektionen mer responsive
+ */
 
 @media screen and (max-width: 619px) {
   .radio {
