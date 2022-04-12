@@ -266,6 +266,10 @@ body {
   font-weight: 400;
 }
 
+.confirm-container form {
+  display: contents;
+}
+
 @media screen and (max-width: 619px) {
   .radio {
     margin-bottom: 16px;
