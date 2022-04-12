@@ -35,10 +35,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
   // if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
   //   && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
   // {
-  //   if(duplicates($pdo, $_POST['title']) == true)
-  //   {
-  //     Add_Movie($pdo, $_POST);
-  //   }
+  //   duplicates($pdo, $_POST['title'], $_POST);
   // }
   if(isset($_SESSION)){Destroy_Sessiondata();}
 ?>
@@ -125,15 +122,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
           && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
           {
-            if(duplicates($pdo, $_POST['title']) == true)
-            {
               Add_Movie($pdo, $_POST);
-            }
-            else
-            {
-              echo "<div class='form-error' id='titleError'>
-              That movie already exists </div>";
-            }
           }
           ?>
           <form method="post" action="">
@@ -220,7 +209,7 @@ else {
   }
   function Get_Movies($pdo)
   {
-      $query = 'SELECT id, title, director, year, genre FROM movies JOIN genre ON genre.genre_id=movies.genre_id';
+      $query = 'SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id';
       $result = $pdo->query($query);
       while ($row = $result->fetch())
       {
@@ -235,6 +224,16 @@ else {
                           'genre'     => $input['genre']);
       $inputholder = Manage_Array($pdo, $inputholder);
       $id = '';
+      // $title = $inputholder['title'];
+      // $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
+      // $stmt->bindParam(1, $title,      PDO::PARAM_STR, 128);
+      // $result = $stmt->execute([$title]);
+      // if($result  1)
+      // {
+      //   echo "finns redan";
+      // }
+      // else{
+
       $stmt = $pdo->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
       $stmt->bindParam(1, $id,                        PDO::PARAM_INT);
       $stmt->bindParam(2, $inputholder['title'],      PDO::PARAM_STR, 128);
@@ -246,6 +245,7 @@ else {
                       $inputholder['director'],
                       $inputholder['year'],
                       $inputholder['genre']]);
+      // }
   }
   function Redirect($path) 
   {
@@ -268,18 +268,20 @@ else {
       //Förstör alla värden i våran session array
       session_destroy(); 
   }
-  function duplicates($pdo, $check)
-  {
-    $holder = Manage_String($pdo, $check);
-    $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
-    $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
-    $stmt->execute([$holder]);
-    $result = $stmt;
-    if($result->rowCount())
-    {
-      return false;
-    }
-  }
+  // function duplicates($pdo, $check, $post)
+  // {
+  //   $holder = Manage_String($pdo, $check);
+  //   $stmt = $pdo->prepare('SELECT titel FROM movies WHERE title="?"');
+  //   $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
+  //   $stmt->execute([$holder]);
+  //   $result = $stmt;
+  //   if($result === $
+  //   {
+  //     echo "Title already excist";
+  //   }
+  //   else{Add_Movie($pdo, $_POST);}
+    
+  // }
   function get_sortedmovies($pdo, $order)
   {
       $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY $order";
