@@ -1,6 +1,7 @@
 .delete-btn {
   height: 40px;
   width: 100%;
+  min-width: 230px;
   background-color: #c14040;
   font-size: 24px;
   cursor: pointer;
@@ -11,12 +12,14 @@
   transition: all 0.45s ease;
   font-family: "exo", sans-serif;
   font-weight: 500;
+  flex: 1;
 }
 
 .apply-btn {
   background-color: #546a9f;
   height: 40px;
   width: 50%;
+  min-width: 230px;
   border-radius: 5px;
   font-size: 24px;
   text-align: center;
@@ -27,6 +30,7 @@
   border: none;
   font-family: "exo", sans-serif;
   font-weight: 500;
+  flex: 1;
 }
 
 .apply-btn:hover {
@@ -190,4 +194,5 @@
 
 #deleteConfirm {
   width: 50%;
+  display: contents;
 }
