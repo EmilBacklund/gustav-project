@@ -123,6 +123,7 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
           && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
           {
               Add_Movie($pdo, $_POST);
+              Redirect('main.php');
           }
           ?>
           <form method="post" action="">
@@ -130,9 +131,9 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
             <input placeholder="Search Movie.." type="search" id="site-search" name="search" class="search-bar">
             <input type="submit" value="Search" class="search-movie">
           </div>
+          </form>
         </div>
       </div>
-    </form>
   </div>
   <div class='media-block media_library'>
     <h1>Media Library</h1>
@@ -218,22 +219,13 @@ else {
   }
   function Add_Movie($pdo, $input)
   {
+    
       $inputholder = array('title'    => $input['title'],
                           'director'  => $input['director'],
                           'year'      => $input['year'],
                           'genre'     => $input['genre']);
       $inputholder = Manage_Array($pdo, $inputholder);
       $id = '';
-      // $title = $inputholder['title'];
-      // $stmt = $pdo->prepare('SELECT title FROM movies WHERE title=?');
-      // $stmt->bindParam(1, $title,      PDO::PARAM_STR, 128);
-      // $result = $stmt->execute([$title]);
-      // if($result  1)
-      // {
-      //   echo "finns redan";
-      // }
-      // else{
-
       $stmt = $pdo->prepare('INSERT INTO movies VALUES(?,?,?,?,?)');
       $stmt->bindParam(1, $id,                        PDO::PARAM_INT);
       $stmt->bindParam(2, $inputholder['title'],      PDO::PARAM_STR, 128);
@@ -241,11 +233,10 @@ else {
       $stmt->bindParam(4, $inputholder['year'],       PDO::PARAM_STR, 4);
       $stmt->bindParam(5, $inputholder['genre'],      PDO::PARAM_INT);
       $result = $stmt->execute([$id,
-                      $inputholder['title'], 
-                      $inputholder['director'],
-                      $inputholder['year'],
-                      $inputholder['genre']]);
-      // }
+        $inputholder['title'],
+        $inputholder['director'],
+        $inputholder['year'],
+        $inputholder['genre']]); 
   }
   function Redirect($path) 
   {
