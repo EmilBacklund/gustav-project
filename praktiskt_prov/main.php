@@ -31,12 +31,6 @@ catch(PDOExeption $e){throw new PDOException($e->getMessage(), (int)$e->getCode(
     $_SESSION['validate'] = hash('ripemd128', $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
     Redirect('edit.php');
   }
-  
-  // if(isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['genre'])
-  //   && strlen($_POST['title']) >= 1 && strlen($_POST['director']) >= 1 && strlen($_POST ['year']) === 4 && is_numeric($_POST['year']))
-  // {
-  //   duplicates($pdo, $_POST['title'], $_POST);
-  // }
   if(isset($_SESSION)){Destroy_Sessiondata();}
 ?>
 <body>
@@ -233,10 +227,10 @@ else {
       $stmt->bindParam(4, $inputholder['year'],       PDO::PARAM_STR, 4);
       $stmt->bindParam(5, $inputholder['genre'],      PDO::PARAM_INT);
       $result = $stmt->execute([$id,
-        $inputholder['title'],
-        $inputholder['director'],
-        $inputholder['year'],
-        $inputholder['genre']]); 
+                              $inputholder['title'],
+                              $inputholder['director'],
+                              $inputholder['year'],
+                              $inputholder['genre']]); 
   }
   function Redirect($path) 
   {
@@ -259,20 +253,6 @@ else {
       //Förstör alla värden i våran session array
       session_destroy(); 
   }
-  // function duplicates($pdo, $check, $post)
-  // {
-  //   $holder = Manage_String($pdo, $check);
-  //   $stmt = $pdo->prepare('SELECT titel FROM movies WHERE title="?"');
-  //   $stmt->bindParam(1, $holder, PDO::PARAM_STR, 128);
-  //   $stmt->execute([$holder]);
-  //   $result = $stmt;
-  //   if($result === $
-  //   {
-  //     echo "Title already excist";
-  //   }
-  //   else{Add_Movie($pdo, $_POST);}
-    
-  // }
   function get_sortedmovies($pdo, $order)
   {
       $query = "SELECT id, title, director, year, genre FROM movies, genre WHERE genre.genre_id=movies.genre_id ORDER BY $order";
