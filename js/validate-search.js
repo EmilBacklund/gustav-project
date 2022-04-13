@@ -1,3 +1,7 @@
+// JavaScript som förhindrar användaren att skriva in bokstäver i
+// "year" inputen. Förhindrar också användaren att skriva in mer
+// än 4 siffror.
+
 function validateYear(evt) {
   var theEvent = evt || window.event;
 
